@@ -1,5 +1,4 @@
 import axios from "axios";
-import config from "../config.js"
 
 export default {
     state: {
@@ -19,7 +18,7 @@ export default {
             commit('adminClearError')
             commit('adminSetLoading', true)
             try {
-                const response = await axios.post(config.serverPath + "administrator", {
+                const response = await axios.post(this.serverPath + "administrator", {
                     method: 'login',
                     arguments: {
                         login: login,

@@ -4,6 +4,7 @@ var adminLogin = 'admin';
 var adminPassword = 'admin';
 
 export const administrator = (req, res) => {
+    console.log(req.body)
     const data = req.body;
     function response(err, results) {
         if (err) {

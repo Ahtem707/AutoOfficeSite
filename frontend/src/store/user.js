@@ -1,5 +1,4 @@
 import axios from "axios";
-import config from "./config.js"
 
 class User {
     constructor (user) {
@@ -26,7 +25,7 @@ export default {
             commit('clearError')
             commit('setLoading', true)
             try {
-                const response = await axios.post(config.serverPath, {
+                const response = await axios.post(this.serverPath, {
                     method: 'loginUser',
                     arguments: {
                         email: email,
@@ -49,8 +48,6 @@ export default {
     getters: {
         user(state) {
             return state.user
-            // console.log(state.user)
-            // return false
         },
         IsUserLoggedIn(state) {
             return state.logged

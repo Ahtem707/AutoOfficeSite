@@ -4,11 +4,6 @@
       <v-container fill-height="fill-height">
         <v-layout justify-center="justify-center">
           <v-flex class="login-form text-xs-center">
-            <h1 class="text-center">
-              <div class="display-1 mb-3">
-                <v-icon class="mr-2" large="large">work</v-icon> MyWorkspace
-              </div>
-            </h1>
             <v-card light="light">
               <v-toolbar dark color="primary">
                 <v-toolbar-title>

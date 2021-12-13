@@ -1,61 +1,46 @@
-// Import function from Product Model
-import { getProducts, getProductById, insertProduct, updateProductById, deleteProductById } from "../models/productModel.js";
+import db from "../config/database.js";
 
-// Get All Products
-export const showProducts = (req, res) => {
-    getProducts((err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
+export const AddNew = (req, res) => {
+    const data = req.body.arguments
+
+    db.query(`
+        INSERT INTO
+        News(Title,Description,Date,WhereEvents)
+        Value(
+            '${data.title}',
+            '${data.description}',
+            '${data.date}',
+            '${data.whereEvents}');`,
+        (err, results) => {             
+            if(err) {
+                console.log(err);
+                res.send(err)
+            } else {
+                res.json(results)
+            }
         }
-    });
+    )
 }
 
-// Get Single Product 
-export const showProductById = (req, res) => {
-    getProductById(req.params.id, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
-}
+export const GetNews = (req, res) => {
+    const limit = req.body.arguments.limit
 
-// Create New Product
-export const createProduct = (req, res) => {
-    const data = req.body;
-    insertProduct(data, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
+    db.query(`
+        SELECT
+            Title,
+            Description,
+            Date,
+            WhereEvents
+        FROM
+            News
+        Limit ${limit}`,
+        (err, results) => {             
+            if(err) {
+                console.log(err);
+                res.send(err)
+            } else {
+                res.json(results)
+            }
         }
-    });
-}
-
-// Update Product
-export const updateProduct = (req, res) => {
-    const data  = req.body;
-    const id    = req.params.id;
-    updateProductById(data, id, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
-}
-
-// Delete Product
-export const deleteProduct = (req, res) => {
-    const id = req.params.id;
-    deleteProductById(id, (err, results) => {
-        if (err){
-            res.send(err);
-        }else{
-            res.json(results);
-        }
-    });
+    )
 }
