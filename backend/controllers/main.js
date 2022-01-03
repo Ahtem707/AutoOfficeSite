@@ -1,11 +1,11 @@
-import db from "../config/database.js";
-import { AddNews } from "./product.js";
-
-import { Login, Register, GetBirthday } from "./user.js";
+import { Register, UpdateUser, UpdateUserLastEntry, Login, GetBirthday } from "./user.js";
+import { AddNew, GetNews } from "./news.js";
+import { GetMyDevices, AddMyDevice } from "./myDevices.js"
 
 export const main = (req, res) => {
     const data = req.body;
-    if(data.session) console.log("session true")
+    if (data.session) console.log("session true")
+
     function response(err, results) {
         if (err) {
             console.log(err);
@@ -14,21 +14,33 @@ export const main = (req, res) => {
             res.json(results)
         }
     }
-    switch(data.method) {
+    switch (data.method) {
         case 'createUser':
-            Register(req,res)
+            Register(req, res)
             break
         case 'loginUser':
-            Login(req,res)
+            Login(req, res)
+            break
+        case 'updateUser':
+            UpdateUser(req, res)
+            break
+        case 'updateUserLastEntry':
+            UpdateUserLastEntry(req, res)
             break
         case 'getBirthday':
-            GetBirthday(req,res)
+            GetBirthday(req, res)
             break
         case 'addNew':
-            AddNew(req,res)
+            AddNew(req, res)
             break
         case 'getNews':
-            GetNews(req,res)
+            GetNews(req, res)
+            break
+        case 'addMyDevice':
+            AddMyDevice(req, res)
+            break
+        case 'getMyDevices':
+            GetMyDevices(req, res)
             break
     }
 }

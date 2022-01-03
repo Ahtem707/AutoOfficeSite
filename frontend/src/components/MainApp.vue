@@ -1,10 +1,9 @@
 <template>
-  <v-app>
-    <v-main>
-    
+    <div>
+      <button class="btn btn-primary languageBtn button" @click="languageBtnClick()">
+        {{this.$t('system.languageBtn')}}</button>
       <router-view></router-view>
-    </v-main>
-  </v-app>
+    </div>
 </template>
 
 <script>
@@ -22,7 +21,7 @@ export default {
       if(this.user){
         return [
           {title:'Домой', icon: 'home', url: '/'},
-          {title:'Созать книгу', icon: 'mdi-plus-circle', url: '/newbook'},
+          {title:'Создать книгу', icon: 'mdi-plus-circle', url: '/newbook'},
           {title:'Мои книги', icon: 'mdi-briefcase-plus', url: '/myBooks'}
         ]
       }
@@ -38,6 +37,13 @@ export default {
   methods: {
     exit(){
       this.$store.commit('exit')
+    },
+    languageBtnClick() {
+      if(this.$i18n.locale == "en") {
+        this.$i18n.locale = "ru"
+      } else {
+        this.$i18n.locale = "en"
+      }
     }
   }
 }
@@ -46,5 +52,11 @@ export default {
 <style scoped>
   .pointer{
     cursor: pointer;
+  }
+  .languageBtn {
+    position: absolute;
+    top: 40px;
+    right: 62px;
+    z-index: 10;
   }
 </style>

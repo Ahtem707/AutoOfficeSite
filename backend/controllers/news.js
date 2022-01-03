@@ -11,8 +11,8 @@ export const AddNew = (req, res) => {
             '${data.description}',
             '${data.date}',
             '${data.whereEvents}');`,
-        (err, results) => {             
-            if(err) {
+        (err, results) => {
+            if (err) {
                 console.log(err);
                 res.send(err)
             } else {
@@ -34,8 +34,8 @@ export const GetNews = (req, res) => {
         FROM
             News
         Limit ${limit}`,
-        (err, results) => {             
-            if(err) {
+        (err, results) => {
+            if (err) {
                 console.log(err);
                 res.send(err)
             } else {

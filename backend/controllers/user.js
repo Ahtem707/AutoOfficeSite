@@ -1,6 +1,6 @@
 import db from "../config/database.js";
 
-export const Register = (req,res) => {
+export const Register = (req, res) => {
     const data = req.body.arguments;
     db.query(`
         INSERT INTO Users(userName,email,password,userRoles_idUserRoles,birthday)
@@ -10,8 +10,8 @@ export const Register = (req,res) => {
             '${data.password}',
             '${data.userRolesId}',
             '${data.birthday}');`,
-        (err, results) => {             
-            if(err) {
+        (err, results) => {
+            if (err) {
                 console.log(err);
                 res.send(err)
             } else {
@@ -21,22 +21,52 @@ export const Register = (req,res) => {
     )
 }
 
-// export const UpdateUser = (req,res) => {
-//     db.query(`
-//         UPDATE `,
-//         (err, results) => {             
-//             if(err) {
-//                 console.log(err);
-//                 res.send(err)
-//             } else {
-//                 res.json(results)
-//             }
-//         }
-//     )
-// }
+// Требует проверки
+export const UpdateUser = (req, res) => {
+    const { idUser, avatar, userName, email, password, userRole, birthday } = req.body.arguments;
+    db.query(`
+        UPDATE Users
+        SET
+            ${avatar ? "avatarSrc = "+avatar+"," : ""}
+            ${userName ? "userName = "+userName+"," : ""}
+            ${email ? "email = "+email+"," : ""}
+            ${password ? "password = "+password+"," : ""}
+            ${password ? "password = "+password+"," : ""}
+            ${userRole ? "UserRoles_idUserRoles = "+userRole+"," : ""}
+            ${birthday ? "birthday = "+birthday+"," : ""}
+            idUsers = ${idUser}
+        WHERE
+            idUsers = ${idUser}`,
+        (err, results) => {
+            if (err) {
+                console.log(err);
+                res.send(err)
+            } else {
+                res.json(results)
+            }
+        }
+    )
+}
 
-export const Login = (req,res) => {
-    const {email,password} = req.body.arguments;
+export const UpdateUserLastEntry = (req, res) => {
+    const { idUser, lastEntry } = req.body.arguments;
+    db.query(`
+        UPDATE Users
+        SET last_entry = ${lastEntry}
+        WHERE idUsers = ${idUser}`,
+        (err, results) => {
+            if (err) {
+                console.log(err);
+                res.send(err)
+            } else {
+                res.json(results)
+            }
+        }
+    )
+}
+
+export const Login = (req, res) => {
+    const { email, password } = req.body.arguments;
     console.log(email)
     console.log(password)
     db.query(`
@@ -48,8 +78,8 @@ export const Login = (req,res) => {
         WHERE
             email = '${email}' AND
             password = '${password}'`,
-        (err, results) => {             
-            if(err) {
+        (err, results) => {
+            if (err) {
                 console.log(err);
                 res.send(err)
             } else {
@@ -74,8 +104,8 @@ export const GetBirthday = (req, res) => {
         WHERE
             birthday >= now() - INTERVAL ${earlierDays} DAY
         LIMIT ${limit}`,
-        (err, results) => {             
-            if(err) {
+        (err, results) => {
+            if (err) {
                 console.log(err);
                 res.send(err)
             } else {

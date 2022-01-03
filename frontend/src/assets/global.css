@@ -1,0 +1,21 @@
+.mainBackend {
+    background: rgb(45, 29, 231);
+    background: linear-gradient(0deg, rgba(45, 29, 231, 0.71) 0%, rgba(232, 68, 68, 1) 100%);
+}
+
+.textDefault,
+p {
+    color: #000
+}
+
+.textLinks {
+    color: #498BEE
+}
+
+.button {
+    border-radius: 15px;
+}
+
+.cornerRadius {
+    border-radius: 10px;
+}
