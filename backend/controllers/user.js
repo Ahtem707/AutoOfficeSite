@@ -3,9 +3,10 @@ import db from "../config/database.js";
 export const Register = (req, res) => {
     const data = req.body.arguments;
     db.query(`
-        INSERT INTO Users(userName,email,password,userRoles_idUserRoles,birthday)
+        INSERT INTO Users(userName,phone,email,password,userRoles_idUserRoles,birthday)
         VALUE(
             '${data.name}',
+            '${data.phone}',
             '${data.email}',
             '${data.password}',
             '${data.userRolesId}',
@@ -66,9 +67,7 @@ export const UpdateUserLastEntry = (req, res) => {
 }
 
 export const Login = (req, res) => {
-    const { email, password } = req.body.arguments;
-    console.log(email)
-    console.log(password)
+    const { login, password } = req.body.arguments;
     db.query(`
         SELECT
             idUsers AS uid,
@@ -76,7 +75,8 @@ export const Login = (req, res) => {
         FROM
             Users
         WHERE
-            email = '${email}' AND
+            (email = '${login}' OR
+            phone = '${login}') AND
             password = '${password}'`,
         (err, results) => {
             if (err) {
@@ -95,6 +95,27 @@ export const GetBirthday = (req, res) => {
     const earlierDays = data.earlierDays || 5
     const limit = data.limit || 6
 
+    db.query(`
+        SELECT
+            userName,
+            birthday
+        FROM
+            Users
+        WHERE
+            birthday >= now() - INTERVAL ${earlierDays} DAY
+        LIMIT ${limit}`,
+        (err, results) => {
+            if (err) {
+                console.log(err);
+                res.send(err)
+            } else {
+                res.json(results)
+            }
+        }
+    )
+}
+
+export const GetRoles = (req, res) => {
     db.query(`
         SELECT
             userName,

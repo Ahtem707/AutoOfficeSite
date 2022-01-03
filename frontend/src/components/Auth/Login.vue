@@ -11,7 +11,7 @@
                 <p class="formTitle">{{this.$t("login.signIn")}}</p>
                 <v-text-field
                   name="email"
-                  v-model="user.email"
+                  v-model="user.login"
                   light="light"
                   prepend-icon="email"
                   :label="$t('login.emailTextField')"
@@ -63,7 +63,7 @@ export default {
         valid: false,
       },
       user: {
-        email: "",
+        login: "",
         password: "",
       },
       emailRules: [
@@ -88,7 +88,7 @@ export default {
     submit() {
       if (this.$refs.form.validate()) {
         const user = {
-          email: this.user.email,
+          login: this.user.login,
           password: this.user.password,
         };
         this.$store.dispatch('LoginUser',user)

@@ -6,14 +6,7 @@ export const main = (req, res) => {
     const data = req.body;
     if (data.session) console.log("session true")
 
-    function response(err, results) {
-        if (err) {
-            console.log(err);
-            res.send(err)
-        } else {
-            res.json(results)
-        }
-    }
+
     switch (data.method) {
         case 'createUser':
             Register(req, res)
