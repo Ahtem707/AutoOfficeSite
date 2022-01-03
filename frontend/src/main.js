@@ -16,8 +16,6 @@ import VueSession from 'vue-session'
 import VueI18n from "vue-i18n"
 import localize from "./localize.ts"
 
-Vue.prototype.serverPath = "http://localhost:5000/"; // Хост сервера bakcend
-
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token')
 if (token) {
