@@ -14,7 +14,7 @@ export const Register = (req, res) => {
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }
@@ -33,15 +33,15 @@ export const UpdateUser = (req, res) => {
             ${email ? "email = "+email+"," : ""}
             ${password ? "password = "+password+"," : ""}
             ${password ? "password = "+password+"," : ""}
-            ${userRole ? "UserRoles_idUserRoles = "+userRole+"," : ""}
             ${birthday ? "birthday = "+birthday+"," : ""}
+            ${userRole ? "UserRoles_idUserRoles = "+userRole+"," : ""}
             idUsers = ${idUser}
         WHERE
             idUsers = ${idUser}`,
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }
@@ -58,7 +58,7 @@ export const UpdateUserLastEntry = (req, res) => {
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }
@@ -81,7 +81,7 @@ export const Login = (req, res) => {
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }
@@ -107,7 +107,7 @@ export const GetBirthday = (req, res) => {
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }
@@ -115,20 +115,17 @@ export const GetBirthday = (req, res) => {
     )
 }
 
-export const GetRoles = (req, res) => {
+export const GetUserRoles = (req, res) => {
     db.query(`
         SELECT
-            userName,
-            birthday
+            idUserRoles,
+            userRoles
         FROM
-            Users
-        WHERE
-            birthday >= now() - INTERVAL ${earlierDays} DAY
-        LIMIT ${limit}`,
+            UserRoles`,
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }

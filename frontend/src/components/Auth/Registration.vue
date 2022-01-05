@@ -1,128 +1,178 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-container fill-height="fill-height">
-        <v-layout justify-center="justify-center">
-          <v-flex class="login-form text-xs-center">
-            <h1 class="text-center">
-              <div class="display-1 mb-3">
-                <v-icon class="mr-2" large="large">work</v-icon> MyWorkspace
-              </div>
-            </h1>
-            <v-card light="light">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title> Crate a new account </v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-form v-model="valid" ref="form" lazy-validation>
+  <v-app style="background: transparent">
+    <div class="container h-100 w-100">
+      <div class="row justify-content-center h-100">
+        <div class="col align-self-center">
+          <div class="container">
+            <div class="row justify-content-center">
+                <v-form v-model="options.valid" ref="form" class="loginForm cornerRadius">
+                  <p class="formTitle">{{this.$t("registration.title")}}</p>
                   <v-text-field
                     name="name"
-                    v-model="name"
+                    v-model="user.name"
                     light="light"
                     prepend-icon="person"
-                    label="Name"
-                    :rules="nameRules"
+                    :label="$t('textField.name')"
+                    :rules="rules.nameRules"
+                    :error-messages="error.name ? this.$t('textField.nameErrorUnique') : ''"
+                  ></v-text-field>
+                  <v-text-field
+                    name="phone"
+                    v-model="user.phone"
+                    light="light"
+                    prepend-icon="phone"
+                    :label="$t('textField.phone')"
+                    :rules="rules.phoneRules"
                   ></v-text-field>
                   <v-text-field
                     name="email"
-                    v-model="email"
+                    v-model="user.email"
                     light="light"
                     prepend-icon="email"
-                    label="Email"
+                    :label="$t('textField.email')"
                     type="email"
-                    :rules="emailRules"
+                    :rules="rules.emailRules"
+                    :error-messages="error.email ? this.$t('textField.emailErrorUnique') : ''"
                   ></v-text-field>
+                  <v-select
+                    :items="this.$store.getters.userRoles"
+                    item-text="userRoles"
+                    item-value="idUserRoles"
+                    prepend-icon="person"
+                    v-model="user.role"
+                    :label="$t('textField.role')"
+                    :rules="rules.roleRules"
+                  ></v-select>
+                  <date-text-field 
+                  :label="$t('textField.birthday')"
+                  :rules="rules.birthdayRules"
+                  @updateDate="user.birthday = $event"/>
                   <v-text-field
                     name="password"
-                    v-model="password"
+                    v-model="user.password"
                     light="light"
                     prepend-icon="lock"
-                    label="Password"
+                    :label="$t('textField.password')"
                     type="password"
                     counter
                     maxlength=32
-                    :rules="passwordRules"
+                    :rules="rules.passwordRules"
                   ></v-text-field>
                   <v-text-field
                     name="confirmPassoword"
-                    v-model="confirmPassword"
+                    v-model="user.confirmPassword"
                     light="light"
                     prepend-icon="lock"
-                    label="Confirm password"
+                    :label="$t('textField.confirmPassword')"
                     type="password"
                     counter
                     maxlength=32
-                    :rules="confirmPasswordRules"
+                    :rules="rules.confirmPasswordRules"
                   ></v-text-field>
+                  <v-spacer style="height: 40px"></v-spacer>
                   <v-btn
+                    class="button"
                     block="block"
-                    type="submit"
-                    @click="registration()"
-                    :disabled="!valid"
-                    :class="{ primary: valid }"
-                    >Sign up</v-btn
-                  >
+                    @click="submit()"
+                    :disabled="!options.valid"
+                    :class="{ primary: options.valid }"
+                    >{{ $t('registration.nextBtn') }}</v-btn>
                 </v-form>
-              </v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </v-app>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
-      valid: false,
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) =>
-          (v && v.length >= 6) ||
-          "Name must be more or equel than 6 characters",
-      ],
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
-      passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) =>
-          (v && v.length >= 6) ||
-          "Password must be more or equel than 6 characters",
-      ],
-      confirmPasswordRules: [
-        (v) => !!v || "Password is required",
-        (v) => v === this.password || "Password should match",
-      ],
+      options: {
+        shouldStayLoggedIn: false,
+        valid: false,
+      },
+      user: {
+        name: "tester",
+        phone: "80123456789",
+        email: "Oleg@mail.ru",
+        role: "",
+        birthday: "",
+        password: "123456",
+        confirmPassword: "123456",
+      },
+      error: {
+        name: false,
+        email: false
+      },
+      rules: {
+        nameRules: [
+          (v) => !!v || this.$t('rules.name.required'),
+          (v) => (v && v.length >= 6) || this.$t('rules.name.isValid'),
+        ],
+        phoneRules: [
+            (v) => !!v || this.$t('rules.phone.required'),
+            (v) => /^(8|\+7)[0-9]{10}$/.test(v) || this.$t('rules.phone.isValid'),
+        ],
+        emailRules: [
+            (v) => !!v || this.$t('rules.email.required'),
+            (v) => /.+@.+\..+/.test(v) || this.$t('rules.email.isValid'),
+        ],
+        roleRules: [
+            (v) => !!v || this.$t('rules.role.required')
+        ],
+        birthdayRules: [
+            (v) => !!v || this.$t('rules.birthday.required')
+        ],
+        passwordRules: [
+            (v) => !!v || this.$t('rules.password.required'),
+            (v) => (v && v.length >= 6) || this.$t('rules.password.isValid'),
+        ],
+        confirmPasswordRules: [
+          (v) => !!v || this.$t('rules.confirmPassword.required'),
+          (v) => v === this.user.password || this.$t('rules.confirmPassword.isValid'),
+        ]
+      },
     };
   },
+  created() {
+    this.$store.dispatch('getUserRoles')
+  },
+  watch: {
+    '$i18n.locale'() {
+      this.$refs.form.validate()
+    },
+    'user.name'() {
+      this.error.name = false
+    },
+    'user.email'() {
+      this.error.email = false
+    }
+  },
   methods: {
-    async registration() {
-      if (this.$refs.form.validate()) {
-        try {
-          await axios.post(this.serverPath, {
-            method: "createUser",
-            arguments: {
-              name: this.name,
-              email: this.email,
-              password: this.password
-            },
-          });
-          this.$router.push("/");
-        } catch (err) {
-          this.name = "";
-          this.email = "";
-          this.password = "";
-          console.log(err);
-        }
+    submit() {
+      if(this.$refs.form.validate()) {
+        const user = {
+          name: this.user.name,
+          phone: this.user.phone,
+          email: this.user.email,
+          password: this.user.password,
+          userRolesId: this.user.role,
+          birthday: this.user.birthday
+        };
+        this.$store.dispatch('UserRegistration',user)
+        .then(() => {
+            this.$router.push('/')
+        })
+        .catch((err)=>{
+          if(/^Duplicate entry '.*' for key 'userName_UNIQUE'$/.test(err.sqlMessage)) {
+            this.error.name = true
+          } else if(/^Duplicate entry '.*' for key 'email_UNIQUE'$/.test(err.sqlMessage)) {
+            this.error.email = true
+          }
+        })
       }
     },
   },
@@ -130,7 +180,32 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  margin-bottom: 70px;
+}
+.title > span {
+  font-size: 72px;
+}
+.title > span:nth-child(1) {
+  color: red
+}
+.title > span:nth-child(2) {
+  color: blue
+}
+
 .login-form {
   max-width: 500px;
+}
+.formTitle {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+  color: black;
+  text-align: center;
+}
+.loginForm {
+  width: 440px;
+  max-height: 700px;
+  background: white;
+  padding: 58px;
 }
 </style>

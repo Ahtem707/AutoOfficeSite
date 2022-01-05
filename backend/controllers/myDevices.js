@@ -14,7 +14,7 @@ export const GetMyDevices = (req, res) => {
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }
@@ -40,7 +40,7 @@ export const AddMyDevice = (req, res) => {
         (err, results) => {
             if (err) {
                 console.log(err);
-                res.send(err)
+                res.json({ "error": err })
             } else {
                 res.json(results)
             }

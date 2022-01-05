@@ -1,5 +1,6 @@
 import axios from "axios";
 import configure from "./Configure.js"
+// import Vue from 'vue'
 
 class User {
     constructor(user) {
@@ -10,7 +11,8 @@ class User {
 
 export default {
     state: {
-        user: null
+        user: null,
+        roles: null
     },
     mutations: {
         setUser(state, payload) {
@@ -18,10 +20,13 @@ export default {
         },
         exit(state) {
             state.user = null
+        },
+        serUserRoles(state, payload) {
+            state.roles = payload
         }
     },
     actions: {
-        async LoginUser({ commit }, { login, password }) {
+        async UserLogin({ commit }, { login, password }) {
             commit('clearError')
             commit('setLoading', true)
             try {
@@ -33,9 +38,49 @@ export default {
                     }
                 });
                 const user = response.data[0]
-                if (response.data == "Error")
-                    throw response.data
+                if (response.data.error)
+                    throw response.data.error
                 commit('setUser', new User(user))
+                commit('setLoading', false)
+            } catch (error) {
+                commit('setLoading', false)
+                commit('setError', error.message)
+                throw error
+            }
+        },
+        async UserRegistration({ commit }, userData) {
+            commit('clearError')
+            commit('setLoading', true)
+            try {
+                const response = await axios.post(configure.serverPath, {
+                    method: 'createUser',
+                    arguments: {
+                        name: userData.name,
+                        phone: userData.phone,
+                        email: userData.email,
+                        password: userData.password,
+                        userRolesId: userData.userRolesId,
+                        birthday: userData.birthday
+                    }
+                });
+                if (response.data.error)
+                    throw response.data.error
+                commit('setLoading', false)
+            } catch (error) {
+                commit('setLoading', false)
+                commit('setError', error.message)
+                throw error
+            }
+        },
+        async getUserRoles({ commit }) {
+            try {
+                const response = await axios.post(configure.serverPath, {
+                    method: 'getUserRoles'
+                })
+                const roles = response.data
+                if (response.data.error)
+                    throw response.data.error
+                commit('serUserRoles', roles)
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
@@ -50,6 +95,9 @@ export default {
         },
         IsUserLoggedIn(state) {
             return state.logged
+        },
+        userRoles(state) {
+            return state.roles
         }
     }
 }

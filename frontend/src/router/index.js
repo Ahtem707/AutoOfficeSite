@@ -1,38 +1,33 @@
-import Home from '@/components/Home'
-import Ad from '@/components/Books/Ad'
-import MyBooks from '@/components/Books/MyBooks'
-import NewBook from '@/components/Books/NewBook'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import routerIndex from './main.js'
+import routerAdministrator from './administrator.js'
+import MainApp from '@/components/MainApp'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
-import Orders from '@/components/User/Orders'
+import AdminApp from '@/components/AdminApp'
 
-export default [
-    {
-        path: "/",
-        component: Home
-    },
-    {
-        path: "/ad/:id",
-        component: Ad
-    },
-    {
-        path: "/myBooks",
-        component: MyBooks
-    },
-    {
-        path: "/newbook",
-        component: NewBook
-    },
-    {
-        path: "/login",
-        component: Login
-    },
-    {
-        path: "/registration",
-        component: Registration
-    },
-    {
-        path: "/orders",
-        component: Orders
-    },
-]
+Vue.use(VueRouter)
+
+export default new VueRouter({
+    mode: 'history',
+    routes: [{
+            path: "/",
+            component: MainApp,
+            children: routerIndex
+        },
+        {
+            path: "/login",
+            component: Login
+        },
+        {
+            path: "/registration",
+            component: Registration
+        },
+        {
+            path: "/administrator",
+            component: AdminApp,
+            children: routerAdministrator
+        },
+    ]
+})
