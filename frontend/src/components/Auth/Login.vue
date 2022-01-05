@@ -5,18 +5,16 @@
         <div class="col align-self-center">
           <div class="container">
             <div class="row justify-content-center">
-            </div>
-            <div class="row justify-content-center">
               <v-form v-model="options.valid" ref="form" validation class="loginForm cornerRadius">
-                <p class="formTitle">{{this.$t("login.signIn")}}</p>
+                <p class="formTitle">{{this.$t("login.title")}}</p>
                 <v-text-field
                   name="email"
                   v-model="user.login"
                   light="light"
                   prepend-icon="email"
-                  :label="$t('login.emailTextField')"
+                  :label="$t('textField.email')"
                   type="email"
-                  :rules="emailRules"
+                  :rules="rules.emailRules"
                 >
                 </v-text-field>
                 <v-text-field
@@ -24,11 +22,11 @@
                   v-model="user.password"
                   light="light"
                   prepend-icon="lock"
-                  :label="this.$t('login.passwordTextField')"
+                  :label="this.$t('textField.password')"
                   type="password"
                   counter
                   error-count="7"
-                  :rules="passwordRules"
+                  :rules="rules.passwordRules"
                 >
                 </v-text-field>
                 <p>
@@ -66,14 +64,16 @@ export default {
         login: "",
         password: "",
       },
-      emailRules: [
-        (v) => !!v || this.$t('login.emailRequired'),
-        (v) => /.+@.+\..+/.test(v) || this.$t('login.emailIsValid')
-      ],
-      passwordRules: [
-        (v) => !!v || this.$t('login.passwordRequired'),
-        (v) => (v && v.length >= 6) || this.$t('login.passwordIsValid')
-      ]
+      rules: {
+        emailRules: [
+            (v) => !!v || this.$t('rules.email.required'),
+            (v) => /.+@.+\..+/.test(v) || this.$t('rules.email.isValid'),
+        ],
+        passwordRules: [
+            (v) => !!v || this.$t('rules.password.required'),
+            (v) => (v && v.length >= 6) || this.$t('rules.password.isValid'),
+        ]
+      }
     };
   },
   watch: {
@@ -91,7 +91,7 @@ export default {
           login: this.user.login,
           password: this.user.password,
         };
-        this.$store.dispatch('LoginUser',user)
+        this.$store.dispatch('UserLogin',user)
         .then(() => {
             this.$router.push('/')
         })
@@ -126,6 +126,7 @@ export default {
   font-family: "Times New Roman", Times, serif;
   font-size: 24px;
   color: black;
+  text-align: center;
 }
 .loginForm {
   width: 440px;

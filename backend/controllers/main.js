@@ -1,10 +1,12 @@
-import { Register, UpdateUser, UpdateUserLastEntry, Login, GetBirthday } from "./user.js";
+import { Register, UpdateUser, UpdateUserLastEntry, Login, GetBirthday, GetUserRoles } from "./user.js";
 import { AddNew, GetNews } from "./news.js";
 import { GetMyDevices, AddMyDevice } from "./myDevices.js"
 
 export const main = (req, res) => {
     const data = req.body;
-    if (data.session) console.log("session true")
+    if (data.session) {
+        console.log("session true")
+    }
 
 
     switch (data.method) {
@@ -22,6 +24,9 @@ export const main = (req, res) => {
             break
         case 'getBirthday':
             GetBirthday(req, res)
+            break
+        case 'getUserRoles':
+            GetUserRoles(req, res)
             break
         case 'addNew':
             AddNew(req, res)
