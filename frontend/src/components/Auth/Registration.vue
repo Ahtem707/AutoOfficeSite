@@ -164,7 +164,8 @@ export default {
         };
         this.$store.dispatch('UserRegistration',user)
         .then(() => {
-            this.$router.push('/')
+            this.$router.push('/login')
+            alert("Благодарим за регистрацию, ожидайте активациии аккаунта")
         })
         .catch((err)=>{
           if(/^Duplicate entry '.*' for key 'userName_UNIQUE'$/.test(err.sqlMessage)) {

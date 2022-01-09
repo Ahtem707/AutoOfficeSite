@@ -1,5 +1,5 @@
 <template>
-    <v-app style="background: transparent">
+    <v-app style="background: transparent;">
         <div class="mainBackend">
             <router-view v-if="!splash"></router-view>
             <div v-if="splash" class="container h-100 w-100">
@@ -25,12 +25,10 @@ export default {
         }
     },
     created() {
+
         var delay = 3 // in second
         setTimeout(() => {
             this.splash = false
-            if(!this.$store.getters.user && this.$router.currentRoute.path != '/login') {
-                this.$router.push('/login')
-            }
         }, delay * 1000);
     }
 }

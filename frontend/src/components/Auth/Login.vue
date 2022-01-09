@@ -93,11 +93,14 @@ export default {
         };
         this.$store.dispatch('UserLogin',user)
         .then(() => {
-            this.$router.push('/')
+            this.pushStartScreen()
         })
-        .catch(()=>{
-          this.login = '';
-          this.password = '';
+        .catch((error)=>{
+          if(error == "Not confirm") {
+            alert("Просим прощения, но ваш аккаунт еще не подтвержден")
+          }
+          this.user.login = '';
+          this.user.password = '';
         })
       }
     },

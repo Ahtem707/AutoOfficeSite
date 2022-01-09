@@ -1,4 +1,4 @@
-import db from "../config/database.js";
+import { db } from "../config/database.js";
 
 var adminLogin = 'admin';
 var adminPassword = 'admin';
@@ -6,6 +6,7 @@ var adminPassword = 'admin';
 export const administrator = (req, res) => {
     console.log(req.body)
     const data = req.body;
+
     function response(err, results) {
         if (err) {
             console.log(err);
@@ -14,13 +15,14 @@ export const administrator = (req, res) => {
             res.json(results)
         }
     }
-    function createErr(err){
+
+    function createErr(err) {
         throw new Error(err)
     }
     switch (data.method) {
         case 'login':
             if (data.arguments.login == adminLogin && data.arguments.password == adminPassword) {
-                response(null,true)
+                response(null, true)
             } else {
                 response(createErr('Access denied'))
             }

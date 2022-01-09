@@ -1,4 +1,4 @@
-import db from "../config/database.js";
+import { db } from "../config/database.js";
 
 export const GetMyDevices = (req, res) => {
     const { idUser } = req.body.arguments

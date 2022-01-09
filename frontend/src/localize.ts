@@ -2,16 +2,15 @@ export default {
     en: {
         system: {
             languageBtn: "English",
-        },
-        login: {
-            title: "Sign in",
-            noAccount: "No account?",
-            createOne: "Create one!",
-            nextBtn: "Next",
-        },
-        registration: {
-            title: "Register",
-            nextBtn: "Next",
+            menu: {
+                news: "News",
+                myDevices: "My devices",
+                requestEquipment: "Request equipment",
+                scheduleOfWorks: "Schedule of works",
+                iWantAVacation: "I want a vacation",
+                events: "Events",
+                exit: "Exit"
+            }
         },
         textField: {
             name: "Name",
@@ -51,21 +50,36 @@ export default {
                 required: "Password confirmation required",
                 isValid: "Password should match",
             }
+        },
+        login: {
+            title: "Sign in",
+            noAccount: "No account?",
+            createOne: "Create one!",
+            nextBtn: "Next",
+        },
+        registration: {
+            title: "Register",
+            nextBtn: "Next",
+        },
+        birthday: {
+            title: "Birthdays",
+            yesterday: "Yesterday",
+            today: "Today",
+            tomorrow: "Tomorrow"
         }
     },
     ru: {
         system: {
             languageBtn: "Русский",
-        },
-        login: {
-            title: "Войти",
-            noAccount: "Нет аккаунта?",
-            createOne: "Создайте один!",
-            nextBtn: "Далее",
-        },
-        registration: {
-            title: "Регистрация",
-            nextBtn: "Далее",
+            menu: {
+                news: "Новости",
+                myDevices: "Мои устройства",
+                requestEquipment: "Запросить оборудование",
+                scheduleOfWorks: "График работ",
+                iWantAVacation: "Хочу отпуск",
+                events: "Мероприятия",
+                exit: "Выйти"
+            }
         },
         textField: {
             name: "Имя",
@@ -105,6 +119,22 @@ export default {
                 required: "Требуется подтверждение пароля",
                 isValid: "Пароль должен совпадать",
             }
+        },
+        login: {
+            title: "Войти",
+            noAccount: "Нет аккаунта?",
+            createOne: "Создайте один!",
+            nextBtn: "Далее",
+        },
+        registration: {
+            title: "Регистрация",
+            nextBtn: "Далее",
+        },
+        birthday: {
+            title: "Дни рождения",
+            yesterday: "Вчера",
+            today: "Сегодня",
+            tomorrow: "Завтра"
         }
     }
 }

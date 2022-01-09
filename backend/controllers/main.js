@@ -1,5 +1,6 @@
 import { Register, UpdateUser, UpdateUserLastEntry, Login, GetBirthday, GetUserRoles } from "./user.js";
 import { AddNew, GetNews } from "./news.js";
+import { AddEvent, GetEvents } from "./events.js";
 import { GetMyDevices, AddMyDevice } from "./myDevices.js"
 
 export const main = (req, res) => {
@@ -7,7 +8,6 @@ export const main = (req, res) => {
     if (data.session) {
         console.log("session true")
     }
-
 
     switch (data.method) {
         case 'createUser':
@@ -22,7 +22,7 @@ export const main = (req, res) => {
         case 'updateUserLastEntry':
             UpdateUserLastEntry(req, res)
             break
-        case 'getBirthday':
+        case 'getBirthdays':
             GetBirthday(req, res)
             break
         case 'getUserRoles':
@@ -33,6 +33,12 @@ export const main = (req, res) => {
             break
         case 'getNews':
             GetNews(req, res)
+            break
+        case 'addEvent':
+            AddEvent(req, res)
+            break
+        case 'getEvents':
+            GetEvents(req, res)
             break
         case 'addMyDevice':
             AddMyDevice(req, res)

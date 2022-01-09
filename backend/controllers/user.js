@@ -1,4 +1,4 @@
-import db from "../config/database.js";
+import { db } from "../config/database.js";
 
 export const Register = (req, res) => {
     const data = req.body.arguments;
@@ -70,20 +70,31 @@ export const Login = (req, res) => {
     const { login, password } = req.body.arguments;
     db.query(`
         SELECT
-            idUsers AS uid,
-            userName
+            u.idUsers,
+            u.avatarSrc,
+            u.userName,
+            u.phone,
+            u.email,
+            u.birthday,
+            ur.userRoles,
+            u.confirmed
         FROM
-            Users
+            Users as u, UserRoles as ur
         WHERE
+            u.UserRoles_idUserRoles = ur.idUserRoles AND
             (email = '${login}' OR
             phone = '${login}') AND
             password = '${password}'`,
         (err, results) => {
-            if (err) {
+            if (err || results.length == 0) {
                 console.log(err);
                 res.json({ "error": err })
             } else {
-                res.json(results)
+                if (!results[0].confirmed) {
+                    res.json({ "error": "Not confirm" })
+                } else {
+                    res.json(results)
+                }
             }
         }
     )
@@ -97,12 +108,15 @@ export const GetBirthday = (req, res) => {
 
     db.query(`
         SELECT
+            idUsers,
+            avatarSrc,
             userName,
             birthday
         FROM
             Users
         WHERE
             birthday >= now() - INTERVAL ${earlierDays} DAY
+        ORDER BY birthday DESC
         LIMIT ${limit}`,
         (err, results) => {
             if (err) {

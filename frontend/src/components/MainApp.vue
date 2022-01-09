@@ -1,8 +1,23 @@
 <template>
-    <div>
+    <div class="p-5">
       <button class="btn btn-primary languageBtn button" @click="languageBtnClick()">
         {{this.$t('system.languageBtn')}}</button>
-      <router-view></router-view>
+      <div class="row justify-content-between">
+        <div class="col-2" v-if="this.$store.getters.user">
+          <div class="row justify-content-center mb-5">
+            <menu-block/>
+          </div>
+          <div class="row justify-content-center">
+            <birthday-block/>
+          </div>
+        </div>
+        <div class="col-6">
+          <router-view></router-view>
+        </div>
+        <div class="col-2">
+          <!-- EmptyBlock -->
+        </div>
+      </div>
     </div>
 </template>
 
@@ -13,43 +28,25 @@ export default {
       
     }
   },
-  computed: {
-    user() {
-      return this.$store.getters.user
-    },
-    links: function(){
-      if(this.user){
-        return [
-          {title:'Домой', icon: 'home', url: '/'},
-          {title:'Создать книгу', icon: 'mdi-plus-circle', url: '/newbook'},
-          {title:'Мои книги', icon: 'mdi-briefcase-plus', url: '/myBooks'}
-        ]
-      }
-      else {
-        return [
-          {title:'Домой', icon: 'home', url: '/'},
-          {title:'Войти', icon: 'mdi-login', url: '/login'},
-          {title:'Зарегистрироваться', icon: 'mdi-account', url: '/registration'},
-        ]
-      }
-    },
-  },
   methods: {
-    exit(){
-      this.$store.commit('exit')
-    },
     languageBtnClick() {
       if(this.$i18n.locale == "en") {
         this.$i18n.locale = "ru"
       } else {
         this.$i18n.locale = "en"
       }
-    }
-  }
+      this.$session.set('localize', this.$i18n.locale)
+      this.$router.go()
+    },
+  },
 }
 </script>
 
 <style scoped>
+  .container {
+    margin: 0;
+    padding: 0;
+  }
   .pointer{
     cursor: pointer;
   }

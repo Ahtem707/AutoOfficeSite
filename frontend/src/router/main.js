@@ -1,4 +1,6 @@
-import Home from '@/components/Home'
+import News from '@/components/mainScreens/News.vue'
+import Events from '@/components/mainScreens/Events.vue'
+
 import Ad from '@/components/Books/Ad'
 import MyBooks from '@/components/Books/MyBooks'
 import NewBook from '@/components/Books/NewBook'
@@ -7,9 +9,15 @@ import Registration from '@/components/Auth/Registration'
 import Orders from '@/components/User/Orders'
 
 export default [{
-        path: "/",
-        component: Home
+        path: "/news",
+        component: News,
     },
+    {
+        path: "/events",
+        component: Events,
+    },
+
+
     {
         path: "/ad/:id",
         component: Ad

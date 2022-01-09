@@ -4,19 +4,18 @@ import "@/assets/global.css"
 import store from './store'
 import Axios from 'axios'
 import vuetify from './plugins/vuetify.js'
+import './plugins/vueSession'
 import i18n from './plugins/i18n.js'
+import './plugins/extension.js'
 import router from './router/index.js'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import VueSession from 'vue-session'
-import DateTextField from '@/components/DateTextField'
 
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token')
 if (token) {
     Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
-Vue.component('dateTextField', DateTextField)
-Vue.use(VueSession)
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -25,4 +24,23 @@ new Vue({
     store,
     i18n,
     render: h => h(App),
+    created() {
+        this.$session.start()
+        if (this.$session.exists()) {
+            // this.$i18n.locale = this.$session.get('localize')
+            const user = this.$session.get('userAuth')
+            this.$store.dispatch('SessionLogin', user)
+            this.pushStartScreen()
+        } else {
+            this.$router.push('/login')
+        }
+    },
+    methods: {
+        pushStartScreen() {
+            const startScreen = '/news'
+            if (!this.$route.path == startScreen) {
+                this.$router.push(startScreen)
+            }
+        }
+    }
 }).$mount('#app')

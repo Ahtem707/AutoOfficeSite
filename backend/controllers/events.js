@@ -1,16 +1,17 @@
 import { db } from "../config/database.js";
 
-export const AddNew = (req, res) => {
+export const AddEvent = (req, res) => {
     const data = req.body.arguments
 
     db.query(`
         INSERT INTO
-        News(Title,Description,ImageSrc,Date)
+        Events(Title,Description,Date,WhereEvents,ImageSrc)
         Value(
             '${data.title}',
             '${data.description}',
-            '${data.imageSrc}',
-            '${data.date}';`,
+            '${data.date}',
+            '${data.whereEvents}'),
+            '${data.imageSrc}';`,
         (err, results) => {
             if (err) {
                 console.log(err);
@@ -22,17 +23,18 @@ export const AddNew = (req, res) => {
     )
 }
 
-export const GetNews = (req, res) => {
+export const GetEvents = (req, res) => {
     const limit = req.body.arguments.limit || 10
 
     db.query(`
         SELECT
             Title as title,
             Description as description,
-            ImageSrc as imageSrc,
-            Date as date
+            Date as date,
+            WhereEvents as whereEvents,
+            ImageSrc as imageSrc
         FROM
-            News
+            Events
         Limit ${limit}`,
         (err, results) => {
             if (err) {
