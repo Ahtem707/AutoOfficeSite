@@ -41,6 +41,10 @@ export default {
                 {
                     title: this.$t('system.menu.events'),
                     path: '/events',
+                },
+                {
+                    title: "Users",
+                    path: '/users',
                 }
             ]
         }

@@ -53,8 +53,7 @@ export default {
                     }
                 });
                 var user = response.data[0]
-                if (response.data.error)
-                    throw response.data.error
+                if (response.data.error) throw response.data.error
 
                 user.avatarSrc = this.getters.imageServe + user.avatarSrc
                 commit('setUser', new User(user))

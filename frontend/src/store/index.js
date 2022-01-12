@@ -4,6 +4,7 @@ import user from './user'
 import news from './news'
 import events from './events'
 import image from './image.js'
+import userControl from './userControl'
 
 import adminUser from './Administrator/user'
 import adminShared from './Administrator/shared'
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         news,
         events,
         image,
+        userControl,
 
         adminUser,
         adminShared,

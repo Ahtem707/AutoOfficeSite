@@ -26,7 +26,7 @@ new Vue({
     render: h => h(App),
     created() {
         this.$session.start()
-        if (this.$session.exists()) {
+        if (this.$session.get('userAuth')) {
             // this.$i18n.locale = this.$session.get('localize')
             const user = this.$session.get('userAuth')
             this.$store.dispatch('SessionLogin', user)

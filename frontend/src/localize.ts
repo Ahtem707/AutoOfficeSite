@@ -66,6 +66,21 @@ export default {
             yesterday: "Yesterday",
             today: "Today",
             tomorrow: "Tomorrow"
+        },
+        userList: {
+            title: "Users",
+            table: {
+                id: "User id",
+                userName: "User name",
+                phone: "Phone",
+                email: "Email",
+                createTime: "Date of creation",
+                lastEntry: "Last entry",
+                birthday: "Birthday",
+                role: "Role",
+                confirmed: "Confirmed",
+                delete: "Delete"
+            }
         }
     },
     ru: {
@@ -135,6 +150,21 @@ export default {
             yesterday: "Вчера",
             today: "Сегодня",
             tomorrow: "Завтра"
+        },
+        userList: {
+            title: "Пользователи",
+            table: {
+                id: "Идентификатор",
+                userName: "Имя",
+                phone: "Телефон",
+                email: "Почта",
+                createTime: "Дата создания",
+                lastEntry: "Последний вход",
+                birthday: "День рождения",
+                role: "Роль",
+                confirmed: "Подтвержден",
+                delete: "Удалить"
+            }
         }
     }
 }

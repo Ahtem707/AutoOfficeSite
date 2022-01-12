@@ -1,5 +1,6 @@
 import News from '@/components/mainScreens/News.vue'
 import Events from '@/components/mainScreens/Events.vue'
+import Users from '@/components/mainScreens/Users.vue'
 
 import Ad from '@/components/Books/Ad'
 import MyBooks from '@/components/Books/MyBooks'
@@ -15,6 +16,10 @@ export default [{
     {
         path: "/events",
         component: Events,
+    },
+    {
+        path: "/users",
+        component: Users
     },
 
 
