@@ -9,7 +9,7 @@
     "scripts": {
         "start": "vue-cli-service serve --port 8089",
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "build": "vue-cli-service build --mode prod --port 8089",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
