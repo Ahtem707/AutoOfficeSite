@@ -1,0 +1,60 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Ahtem707 
+Ahtem707
+/
+AutoOfficeSite
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+AutoOfficeSite/.gitignore
+@Ahtem707
+Ahtem707 Project init
+Latest commit e6e92ae on 12 Dec 2021
+ History
+ 1 contributor
+18 lines (14 sloc)  443 Bytes
+   
+# Игнорировать каталог node_modules 
+node_modules/ 
+
+# Игнорирование логов 
+logs 
+*.log 
+
+# Игнорирование каталога со сборкой проекта
+/dist 
+
+# Игнорирование файла содержащий переменные окружения  
+.env 
+
+# Игнорирование файлов специфичных для IDE 
+.idea/ 
+.vscode/ 
+*.code-workspace
+*.sw*
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
