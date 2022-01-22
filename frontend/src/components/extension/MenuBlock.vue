@@ -17,36 +17,40 @@ export default {
     },
     computed: {
         menu() {
-            return [
+            var mainMenuList = [
                 {
                     title: this.$t('system.menu.news'),
                     path: '/news',
                 },
-                {
-                    title: this.$t('system.menu.myDevices'),
-                    path: '/',
-                },
-                {
-                    title: this.$t('system.menu.requestEquipment'),
-                    path: '/',
-                },
-                {
-                    title: this.$t('system.menu.scheduleOfWorks'),
-                    path: '/',
-                },
-                {
-                    title: this.$t('system.menu.iWantAVacation'),
-                    path: '/',
-                },
+                // {
+                //     title: this.$t('system.menu.myDevices'),
+                //     path: '/',
+                // },
+                // {
+                //     title: this.$t('system.menu.requestEquipment'),
+                //     path: '/',
+                // },
+                // {
+                //     title: this.$t('system.menu.scheduleOfWorks'),
+                //     path: '/',
+                // },
+                // {
+                //     title: this.$t('system.menu.iWantAVacation'),
+                //     path: '/',
+                // },
                 {
                     title: this.$t('system.menu.events'),
                     path: '/events',
-                },
-                {
-                    title: "Users",
-                    path: '/users',
                 }
             ]
+            if(this.$store.getters.user.userRole == "Администратор") {
+                var users = {
+                    title: this.$t('system.menu.users'),
+                    path: '/users',
+                }
+                mainMenuList.push(users)
+            }
+            return mainMenuList
         }
     },
     methods: {
@@ -64,6 +68,7 @@ export default {
         exit() {
             this.$store.commit("exit")
             this.$router.push('/')
+            this.$router.go()
         }
     },
     created() {

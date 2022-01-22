@@ -4,6 +4,7 @@ import { AddEvent, GetEvents } from "./events.js";
 import { GetMyDevices, AddMyDevice } from "./myDevices.js"
 
 export const main = (req, res) => {
+    console.log("backend Main request")
     const data = req.body;
     if (data.session) {
         console.log("session true")

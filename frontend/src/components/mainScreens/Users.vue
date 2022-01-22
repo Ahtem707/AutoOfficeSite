@@ -8,9 +8,9 @@
           <th>{{ this.$t("userList.table.userName") }}</th>
           <th>{{ this.$t("userList.table.phone") }}</th>
           <th>{{ this.$t("userList.table.email") }}</th>
-          <th>{{ this.$t("userList.table.createTime") }}</th>
-          <th>{{ this.$t("userList.table.lastEntry") }}</th>
-          <th>{{ this.$t("userList.table.birthday") }}</th>
+          <!-- <th>{{ this.$t("userList.table.createTime") }}</th> -->
+          <!-- <th>{{ this.$t("userList.table.lastEntry") }}</th> -->
+          <!-- <th>{{ this.$t("userList.table.birthday") }}</th> -->
           <th>{{ this.$t("userList.table.role") }}</th>
           <th>{{ this.$t("userList.table.confirmed") }}</th>
           <th>{{ this.$t("userList.table.delete") }}</th>
@@ -22,9 +22,9 @@
           <td>{{ item.userName }}</td>
           <td>{{ item.phone }}</td>
           <td>{{ item.email }}</td>
-          <td>{{ item.createTime }}</td>
-          <td>{{ item.lastEntry }}</td>
-          <td>{{ item.birthday }}</td>
+          <!-- <td>{{ item.createTime }}</td> -->
+          <!-- <td>{{ item.lastEntry }}</td> -->
+          <!-- <td>{{ item.birthday }}</td> -->
           <td>{{ item.role }}</td>
           <td>
             <v-checkbox v-model="item.confirmed"></v-checkbox>

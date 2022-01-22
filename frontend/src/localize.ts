@@ -9,6 +9,7 @@ export default {
                 scheduleOfWorks: "Schedule of works",
                 iWantAVacation: "I want a vacation",
                 events: "Events",
+                users: "Users",
                 exit: "Exit"
             }
         },
@@ -93,6 +94,7 @@ export default {
                 scheduleOfWorks: "График работ",
                 iWantAVacation: "Хочу отпуск",
                 events: "Мероприятия",
+                users: "Пользователи",
                 exit: "Выйти"
             }
         },

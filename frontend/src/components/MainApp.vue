@@ -11,10 +11,12 @@
             <birthday-block/>
           </div>
         </div>
+        <v-spacer></v-spacer>
         <div class="col-6">
           <router-view></router-view>
         </div>
-        <div class="col-2">
+        <v-spacer></v-spacer>
+        <div class="col-2" v-if="this.$store.getters.user">
           <!-- EmptyBlock -->
         </div>
       </div>
