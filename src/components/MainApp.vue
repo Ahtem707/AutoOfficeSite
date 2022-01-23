@@ -3,7 +3,7 @@
       <button class="btn btn-primary languageBtn button" @click="languageBtnClick()">
         {{this.$t('system.languageBtn')}}</button>
       <div class="row justify-content-between">
-        <div class="col-2" v-if="this.$store.getters.user">
+        <div class="col-3" v-if="this.$store.getters.user">
           <div class="row justify-content-center mb-5">
             <menu-block/>
           </div>

@@ -16,6 +16,13 @@ if (token) {
     Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
 
+Vue.prototype.pushStartScreen = function() {
+    const startScreen = '/news'
+    if (!(this.$route.path === startScreen)) {
+        this.$router.push(startScreen)
+    }
+}
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -26,22 +33,15 @@ new Vue({
     render: h => h(App),
     created() {
         this.$session.start()
-        console.log("myLog: MainInSession: ", this.$session.getAll())
         if (this.$session.get('userAuth')) {
-            // this.$i18n.locale = this.$session.get('localize')
+            this.$i18n.locale = this.$session.get('localize') || "ru"
             const user = this.$session.get('userAuth')
             this.$store.dispatch('SessionLogin', user)
-            this.pushStartScreen()
+            if (this.$route.path === "/") {
+                this.pushStartScreen()
+            }
         } else {
             this.$router.push('/login')
         }
     },
-    methods: {
-        pushStartScreen() {
-            const startScreen = '/news'
-            if (!this.$route.path == startScreen) {
-                this.$router.push(startScreen)
-            }
-        }
-    }
 }).$mount('#app')

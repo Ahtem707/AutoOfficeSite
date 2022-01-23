@@ -9,7 +9,7 @@ export default {
 
     },
     actions: {
-        async GetAllUsers({ state, commit, getters }, token) {
+        async GetAllUsers({ state, commit, getters }, { token }) {
             commit('clearError')
             commit('setLoading', true)
             try {
@@ -28,17 +28,13 @@ export default {
                 throw error
             }
         },
-        async RemoveUser({ state, commit, getters }, { token, id }) {
+        async RemoveUser({ commit }, { token, id }) {
             try {
                 const response = await axios.post(configure.serverPath + "authUser/" + "removeUser", {
                     token,
                     id
                 });
                 if (response.data.error) throw response.data.error
-                state.allUsers = response.data.map((item) => {
-                    item.avatarSrc = getters.imageServe + item.avatarSrc
-                    return item
-                })
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
@@ -46,7 +42,7 @@ export default {
                 throw error
             }
         },
-        async SetConfirmUser({ state, commit, getters }, { token, id, status }) {
+        async SetConfirmUser({ commit }, { token, id, status }) {
             try {
                 const response = await axios.post(configure.serverPath + "authUser/" + "setConfirmUser", {
                     token,
@@ -54,10 +50,6 @@ export default {
                     status
                 });
                 if (response.data.error) throw response.data.error
-                state.allUsers = response.data.map((item) => {
-                    item.avatarSrc = getters.imageServe + item.avatarSrc
-                    return item
-                })
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)

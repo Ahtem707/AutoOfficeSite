@@ -1,9 +1,4 @@
 export default {
-    serverPath: "https://auto-office-server.herokuapp.com/", // Хост сервера bakcend
-
-    // Настройки FTP-порта для работы с картинками
-    ftp: {
-        user: "u1548790",
-        password: "2K6gxGZ63w4DDJoQ"
-    }
+    serverPath: "https://auto-office-server.herokuapp.com/", // Хост сервера на прод
+    // serverPath: "http://192.168.1.116:3001/", // Хост локального сервера (мокера)
 }

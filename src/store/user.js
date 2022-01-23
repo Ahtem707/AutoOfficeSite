@@ -1,6 +1,7 @@
 import axios from "axios";
 import configure from "./Configure.js"
 import Vue from 'vue'
+import userImageDefault from "../images/defaultIcon.png"
 
 class User {
     constructor(user) {
@@ -54,7 +55,11 @@ export default {
                 });
                 var user = response.data[0]
                 if (response.data.error) throw response.data.error
-                user.avatarSrc = this.getters.imageServe + user.avatarSrc
+                if (user.avatarSrc == null) {
+                    user.avatarSrc = userImageDefault
+                } else {
+                    user.avatarSrc = this.getters.imageServe + user.avatarSrc
+                }
                 commit('setUser', new User(user))
                 commit('setLoading', false)
             } catch (error) {
@@ -78,8 +83,7 @@ export default {
                         birthday: userData.birthday
                     }
                 });
-                if (response.data.error)
-                    throw response.data.error
+                if (response.data.error) throw response.data.error
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)

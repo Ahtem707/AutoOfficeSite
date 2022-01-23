@@ -95,13 +95,13 @@ export default {
         valid: false,
       },
       user: {
-        name: "tester",
-        phone: "80123456789",
-        email: "Oleg@mail.ru",
+        name: "",
+        phone: "",
+        email: "",
         role: "",
         birthday: "",
-        password: "123456",
-        confirmPassword: "123456",
+        password: "",
+        confirmPassword: "",
       },
       error: {
         name: false,
@@ -110,7 +110,7 @@ export default {
       rules: {
         nameRules: [
           (v) => !!v || this.$t('rules.name.required'),
-          (v) => (v && v.length >= 6) || this.$t('rules.name.isValid'),
+          (v) => (v && v.length >= 5) || this.$t('rules.name.isValid'),
         ],
         phoneRules: [
             (v) => !!v || this.$t('rules.phone.required'),

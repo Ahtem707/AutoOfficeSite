@@ -27,7 +27,7 @@ export default {
         rules: {
             name: {
                 required: "Name is required",
-                isValid: "Name must be more or equel than 6 characters",
+                isValid: "Name must be more or equel than 5 characters",
             },
             phone: {
                 required: "Phone is required",
@@ -112,7 +112,7 @@ export default {
         rules: {
             name: {
                 required: "Имя обязательно",
-                isValid: "Имя должно быть больше или равно 6 символам",
+                isValid: "Имя должно быть больше или равно 5 символам",
             },
             phone: {
                 required: "Требуется телефон",

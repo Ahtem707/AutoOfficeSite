@@ -36,7 +36,7 @@ export default {
 .mainBlock {
   padding: 0 50px;
   overflow-y:scroll;
-  height: 80%;
+  height: 700px;
 }
 .contentBlock {
     background: white;

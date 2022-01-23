@@ -35,8 +35,8 @@ export default {
 <style scoped>
 .mainBlock {
   padding: 0 50px;
-  overflow-y:scroll;
-  height: 80%;
+  overflow-y: scroll;
+  height: 700px;
 }
 .contentBlock {
     background: white;
