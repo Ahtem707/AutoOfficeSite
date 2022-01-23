@@ -1,5 +1,5 @@
 <template>
-  <v-app class="container cornerRadius p-2">
+  <div class="mainBlock cornerRadius p-2">
     <h1>{{ this.$t("userList.title") }}</h1>
     <table>
       <thead>
@@ -37,7 +37,7 @@
         </tr>
       </tbody>
     </table>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -81,9 +81,12 @@ export default {
 };
 </script>
 
-<style>
-.container {
-  padding: 0 10px;
+<style scoped>
+.mainBlock {
+  padding: 10px 50px;
+  overflow-y: scroll;
+  height: 700px;
+  background: white;
 }
 table,
 th,
