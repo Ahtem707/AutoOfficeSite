@@ -86,7 +86,6 @@ export default {
       this.$router.push('/registration')
     },
     submit() {
-      console.log("Login.vue: submit")
       if (this.$refs.form.validate()) {
         const user = {
           login: this.user.login,
@@ -94,7 +93,6 @@ export default {
         };
         this.$store.dispatch('UserLogin',user)
         .then(() => {
-            console.log("Login.vue: then")
             this.pushStartScreen()
         })
         .catch((error)=>{

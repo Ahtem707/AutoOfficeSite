@@ -42,6 +42,7 @@ export default {
             commit('setUser', user)
         },
         async UserLogin({ commit }, { login, password }) {
+            console.log("myLog: store/UserLogin")
             commit('clearError')
             commit('setLoading', true)
             try {
