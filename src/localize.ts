@@ -156,13 +156,13 @@ export default {
         userList: {
             title: "Пользователи",
             table: {
-                id: "Идентификатор",
+                id: "Номер",
                 userName: "Имя",
                 phone: "Телефон",
                 email: "Почта",
-                createTime: "Дата создания",
-                lastEntry: "Последний вход",
-                birthday: "День рождения",
+                createTime: "Дата\nсоздания",
+                lastEntry: "Последний\nвход",
+                birthday: "День\nрождения",
                 role: "Роль",
                 confirmed: "Подтвержден",
                 delete: "Удалить"

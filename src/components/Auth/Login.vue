@@ -96,7 +96,6 @@ export default {
             this.pushStartScreen()
         })
         .catch((error)=>{
-          console.log("Login.vue: catch")
           if(error == "Not confirm") {
             alert("Просим прощения, но ваш аккаунт еще не подтвержден")
           }

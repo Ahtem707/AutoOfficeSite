@@ -42,7 +42,6 @@ export default {
             commit('setUser', user)
         },
         async UserLogin({ commit }, { login, password }) {
-            console.log("myLog: store/UserLogin")
             commit('clearError')
             commit('setLoading', true)
             try {
@@ -55,7 +54,6 @@ export default {
                 });
                 var user = response.data[0]
                 if (response.data.error) throw response.data.error
-
                 user.avatarSrc = this.getters.imageServe + user.avatarSrc
                 commit('setUser', new User(user))
                 commit('setLoading', false)

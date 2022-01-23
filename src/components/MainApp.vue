@@ -12,7 +12,7 @@
           </div>
         </div>
         <v-spacer></v-spacer>
-        <div class="col-6">
+        <div class="col-7">
           <router-view></router-view>
         </div>
         <v-spacer></v-spacer>
